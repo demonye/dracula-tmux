@@ -192,6 +192,11 @@ main()
       fi
     fi
 
+    if [ $plugin = "notify" ]; then
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-notify-colors" "dark_gray red")
+      script="#($current_dir/notify.sh)"
+    fi
+
     if $show_powerline; then
       tmux set-option -ga status-right "#[fg=${!colors[0]},bg=${powerbg},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script "
       powerbg=${!colors[0]}
